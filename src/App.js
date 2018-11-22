@@ -7,57 +7,34 @@ import statJson from './data/overall-stats.json';
 import edgeStats from './data/edge-stats';
 import EdgeStats from './EdgeStats';
 import Button from './Button'
-import overAllWc from './data/all_wc.json'
-import edgeWc from './data/edge_wc.json'
-
+import overAllWc from './data/all_wc_80.json'
+import edgeWc from './data/edge_wc_top80.json'
+import headerContents from './data/con_etc.json'
+import contents from './data/content.json'
+import mail3 from './data/mail3.json'
+ 
 import "./App.css" 
+import ContentLists from './ContentLists';
 
 const OVER_ALL = 0;
 const NODE = 1;
 const EDGE = 2;
 
+const BAR_TITLE = ["Overall Analytics", "User Analytics", "Connection Analytics"]
+
 class App extends Component {
   state = {
     sideBarState: OVER_ALL,
     id: 38,
-    stats: [
-      {
-        id: 0,
-        name: "Emails",
-        value: 40,
-        color: "#20a8d8"
-      },
-      {
-        id: 1,
-        name: "Connections",
-        value: 20,
-        color: "#63c2de"
-      },
-      {
-        id: 2,
-        name: "Email Address",
-        value: 30,
-        color: "#ffc107"
-      },
-      {
-        id: 3,
-        name: "Word",
-        value: 89,
-        color: "#f86c6b"
-      },
-      {
-        id: 4,
-        name: "Server",
-        value: 92,
-        color: "#4dbd74"
-      },
-    ],
+    msgList: {},
   }
 
   selectEdge = (id) => {
+    console.log(mail3.edges[id].message_list)
     this.setState({
       id: id,
       sideBarState: EDGE,
+      msgList: mail3.edges[id].message_list
     })
   }
 
@@ -68,26 +45,31 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.state.id)
     return (
       <div className="App">
         <div className="mail-graph">
           <div className="mail-graph-bar">
-            <p>Bar</p>
+            <p>E-mail Crime Investigation System</p>
           </div>
           <Button changeState={this.changeSideBarState}/>
           <MailGraph selectEdge={this.selectEdge} />
         </div>
         <div className="side-graph">
           <div className="side-graph-bar">
-            <p>Bar</p>
+            <p>{BAR_TITLE[this.state.sideBarState]}</p><br />
+            {
+              this.state.sideBarState === EDGE && (
+                <p className="side-graph-bar-subtitle">{mail3.edges[this.state.id].From} & {mail3.edges[this.state.id].To}</p>
+              )
+            }
           </div>
+          <div className="side-graph-container">
           {
             this.state.sideBarState === OVER_ALL &&
             (
               <div>
                 <OverAllStats data={statJson}/>
-                <WordCloud data={overAllWc}/>
+                <WordCloud data={overAllWc[0]}/>
                 <Connectivity id={this.state.id}/>                
               </div>
             )
@@ -99,9 +81,17 @@ class App extends Component {
                 <EdgeStats data={edgeStats[this.state.id]} />
                 <WordCloud data={edgeWc[this.state.id]} />
                 <Connectivity id={this.state.id} />
+                <ContentLists
+                  headers={
+                    this.state.msgList.map(index => {
+                      return headerContents[index]
+                    })
+                  }
+                />
               </div>
             )
           }
+          </div>
         </div>
       </div>
     );

@@ -6,6 +6,7 @@ import 'echarts-wordcloud'
 class WordCloud extends Component {
 
     getOption(data) {
+
         return {
             title: {
                 text: 'Wordcloud',
@@ -44,9 +45,9 @@ class WordCloud extends Component {
                         shadowColor: '#333'
                     }
                 },
-                data: Object.keys(data)
+                data: Object.keys(data).slice(0, 80)
                 .filter(key => {
-                    return data[key] > 1
+                    return key.length < 15 
                 })
                 .map(function (key, index) {
                     //console.log(key, data[name][key])
@@ -60,7 +61,6 @@ class WordCloud extends Component {
     }
 
     render() {
-        console.log('recv', this.props.data)
         return (
             <ReactEcharts 
                 style={{ height: "300px", margin: "25px"}}
