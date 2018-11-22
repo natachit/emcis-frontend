@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import MailGraph from './MailGraph';
 import WordCloud from './WordCloud';
 import Connectivity from './Connectivity';
-import Stats from './Stats';
 import OverAllStats from './OverAllStats';
 import statJson from './data/overall-stats.json';
+import edgeStats from './data/edge-stats';
+import EdgeStats from './EdgeStats';
 
 import "./App.css" 
 
@@ -89,9 +90,9 @@ class App extends Component {
             this.state.sideBarState === EDGE && 
             (
               <div>
-                <Stats data={this.state.stats}/>
-                <WordCloud id={this.state.id}/>
-                <Connectivity id={this.state.id}/>
+                <EdgeStats data={edgeStats[this.state.id]} />
+                <WordCloud id={this.state.id} />
+                <Connectivity id={this.state.id} />
               </div>
             )
           }

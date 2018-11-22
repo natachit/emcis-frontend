@@ -40,6 +40,7 @@
   justify-content: space-around;
   flex-direction: column;
   margin: 0.8%;
+  transition: 0.3s;
 }
 
 .box-large {
@@ -49,7 +50,7 @@
 
 .box-medium {
   width: 48%;
-  height: 100px;
+  height: 80px;
 }
 
 .box-small {
