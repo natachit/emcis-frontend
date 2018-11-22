@@ -11,19 +11,34 @@ class App extends Component {
     id: 0,
     stats: [
       {
-        name: "email",
+        id: 0,
+        name: "Emails",
         value: 50,
         color: "#20a8d8"
       },
       {
-        name: "connection",
+        id: 1,
+        name: "Connections",
         value: 20,
         color: "#63c2de"
       },
       {
-        name: "emailAddress",
+        id: 2,
+        name: "Email Address",
         value: 30,
         color: "#ffc107"
+      },
+      {
+        id: 3,
+        name: "Word",
+        value: 89,
+        color: "#f86c6b"
+      },
+      {
+        id: 4,
+        name: "Server",
+        value: 92,
+        color: "#4dbd74"
       },
     ],
   }
@@ -41,9 +56,9 @@ class App extends Component {
           <MailGraph selectEdge={this.selectEdge} />
         </div>
         <div className="side-graph">
+          <Stats data={this.state.stats}/>
           <WordCloud id={this.state.id}/>
           <Connectivity id={this.state.id}/>
-          <Stats data={this.state.stats}/>
         </div>
       </div>
     );

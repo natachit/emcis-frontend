@@ -6,8 +6,12 @@ class Stats extends Component {
             <div style={{ margin: "20px", display: 'flex', flexWrap: 'wrap' }}>
                 {
                     this.props.data.map(obj => {
+                        var  name = "box"
+                        if(obj.id > 1) {
+                            name = "box-small"
+                        }
                         return (
-                            <div className="box" style={{ backgroundColor: obj.color }}>
+                            <div className={name} style={{ backgroundColor: obj.color }}>
                                 <p />
                                 <p className="number">{obj.value}</p>
                                 <p className="name">{obj.name}</p>

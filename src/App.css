@@ -8,7 +8,9 @@
 }
 
 .mail-graph {
+  height: 100%;
   position: fixed;
+  background-color: #73818f;
 }
 
 .side-graph {
@@ -16,20 +18,28 @@
   margin-left: 50%;
 }
 
-.box {
-  width: 48%;
-  height: 100px;
+.box, .box-small {
   border-radius: 5px;
   display: flex;
   justify-content: space-around;
   flex-direction: column;
-  margin: 1%;
+  margin: 0.8%;
 }
 
+.box {
+  width: 48%;
+  height: 100px;
+}
+
+.box-small {
+  width: 31.5%;
+  height: 80px;
+}
 
 p {
   margin: 0px;
 }
+
 .number {
   text-align: center;
   font-size: 40px;

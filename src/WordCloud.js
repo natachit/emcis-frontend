@@ -3,12 +3,21 @@ import data from "./data/wc22.json"
 import ReactEcharts from "echarts-for-react";
 import 'echarts-wordcloud'
 
-console.log(data)
 
 class WordCloud extends Component {
 
     getOption(id) {
         return {
+            title: {
+                text: 'Wordcloud',
+                textStyle: {
+                    fontSize: 18,
+                    fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+                    fontWeight: 'normal'
+                },
+                padding: 15,
+                top: 5,
+            },
             backgroundColor: "white",
             tooltip: {},
             series: [ {
@@ -53,7 +62,7 @@ class WordCloud extends Component {
     render() {
         return (
             <ReactEcharts 
-                style={{ height: "300px", margin: "20px"}}
+                style={{ height: "300px", margin: "25px"}}
                 option={this.getOption(this.props.id)}
             />
         )

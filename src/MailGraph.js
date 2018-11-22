@@ -18,7 +18,7 @@ class MailGraph extends Component {
                             y: node.y,
                             id: node.id,
                             name: node.label,
-                            symbolSize: node.size,
+                            symbolSize: node.size*2,
                             itemStyle: {
                                 normal: {
                                     color: node.color,
@@ -27,7 +27,12 @@ class MailGraph extends Component {
                                     shadowBlur: 2,
                                     shadowColor: 'rgba(0, 0, 0, 0.6)'
                                 },
-                            }
+                            },
+                            label: {
+                                position: 'right',
+                                formatter: '{b}',
+                                color: 'white'
+                            },
                         };
                     }),
                     edges: json.edges.map(function (edge) {
@@ -50,9 +55,9 @@ class MailGraph extends Component {
                     focusNodeAdjacency: true,
                     lineStyle: {
                         normal: {
-                            width: 0.5,
+                            width: 1,
                             curveness: 0.5,
-                            opacity: 0.5
+                            opacity: 1
                         },
                     }      
                     

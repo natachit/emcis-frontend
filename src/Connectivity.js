@@ -11,8 +11,10 @@ class Connectivity extends Component {
                 textStyle: {
                     fontSize: 18,
                     fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
-                    fontWeight: 'light'
-                }
+                    fontWeight: 'normal'
+                },
+                padding: 15,
+                top: 5,
             },
             backgroundColor: "white",
             animationDurationUpdate: 1500,
@@ -69,7 +71,7 @@ class Connectivity extends Component {
     render() {
         return (
             <ReactEcharts
-                style={{ height: "300px" , margin: "20px" }}
+                style={{ height: "300px" , margin: "25px"}}
                 option={this.getOption(this.props.id)}
             />)
     }
