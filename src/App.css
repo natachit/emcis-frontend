@@ -135,6 +135,7 @@ p {
   border: none;
   color: white;
   position: absolute;
+  z-index: 1;
 }
 
 .home-button::-moz-focus-inner {
