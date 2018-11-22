@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import AnimatedNumber from 'react-animated-number';
 
 class OverAllStats extends Component {
 
@@ -25,7 +26,13 @@ class OverAllStats extends Component {
                         return (
                             <div className={obj.class} style={{ backgroundColor: obj.color }}>
                                 <p />
-                                <p className="number">{obj.value}</p>
+                                <AnimatedNumber 
+                                    className="number" 
+                                    component="text" 
+                                    value={obj.value}
+                                    duration={300}
+                                    stepPrecision={0}
+                                />
                                 <p className="name">{obj.name}</p>
                             </div>
                         )

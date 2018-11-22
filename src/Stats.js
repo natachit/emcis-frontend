@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import AnimatedNumber from 'react-animated-number';
 
 class Stats extends Component {
     render() {
@@ -13,7 +14,20 @@ class Stats extends Component {
                         return (
                             <div className={name} style={{ backgroundColor: obj.color }}>
                                 <p />
-                                <p className="number">{obj.value}</p>
+                                <AnimatedNumber component="text" value={obj.value}
+                                    style={{
+                                        transition: '0.8s ease-out',
+                                        fontSize: 48,
+                                        transitionProperty:
+                                            'background-color, color, opacity'
+                                    }}
+                                    frameStyle={perc => (
+                                        perc === 100 ? {} : {backgroundColor: '#ffeb3b'}
+                                    )}
+                                    duration={300}
+                                    formatValue={n => prettyBytes(n)}
+                                />
+                                {/* <p className="number">{obj.value}</p> */}
                                 <p className="name">{obj.name}</p>
                             </div>  
                         )        
