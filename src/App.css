@@ -15,7 +15,7 @@
 }
 
 .side-graph {
-  background-color: #f0f3f5;
+  background-color: #f0f3f5;;
   margin-left: 50%;
 }
 
@@ -34,7 +34,7 @@
   background-color: lightgrey; 
 }
 
-.box, .box-small {
+.box-large, .box-medium, .box-small {
   border-radius: 5px;
   display: flex;
   justify-content: space-around;
@@ -42,7 +42,12 @@
   margin: 0.8%;
 }
 
-.box {
+.box-large {
+  width: 100%;
+  height: 100px;
+}
+
+.box-medium {
   width: 48%;
   height: 100px;
 }
@@ -50,6 +55,12 @@
 .box-small {
   width: 31.5%;
   height: 80px;
+}
+
+.box-wrapper {
+  margin: 20px;
+  display: flex;
+  flex-wrap: wrap; 
 }
 
 p {

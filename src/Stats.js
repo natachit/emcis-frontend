@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class Stats extends Component {
     render() {
         return (
-            <div style={{ margin: "20px", display: 'flex', flexWrap: 'wrap' }}>
+            <div>
                 {
                     this.props.data.map(obj => {
                         var  name = "box"

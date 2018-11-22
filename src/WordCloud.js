@@ -51,7 +51,6 @@ class WordCloud extends Component {
                 })
                 .map(function (key, index) {
                     //console.log(key, data[name][key])
-                    console.log(data[id])
                     return {
                         name: key,
                         value: data[id][key]  

@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import json from "./data/mail2.json"
+import json from "./data/mail3.json"
 import ReactEcharts from "echarts-for-react";
 
 class MailGraph extends Component {
@@ -18,7 +18,7 @@ class MailGraph extends Component {
                             y: node.y,
                             id: node.id,
                             name: node.label,
-                            symbolSize: node.size*2,
+                            symbolSize: node.size*3,
                             itemStyle: {
                                 normal: {
                                     color: node.color,
@@ -56,7 +56,7 @@ class MailGraph extends Component {
                     lineStyle: {
                         normal: {
                             width: 1,
-                            curveness: 0.5,
+                            curveness: 0.3,
                             opacity: 1
                         },
                     }      
@@ -67,8 +67,10 @@ class MailGraph extends Component {
         }
     }   
     
-    onChartClick = (e) => {
-        this.props.selectEdge(e.data.id)
+    onChartClick = (e) => {    
+        if (e.dataType === "edge") {
+            this.props.selectEdge(e.data.id)
+        }
     }
 
     render() {

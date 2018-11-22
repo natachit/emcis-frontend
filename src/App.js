@@ -2,18 +2,25 @@ import React, { Component } from 'react';
 import MailGraph from './MailGraph';
 import WordCloud from './WordCloud';
 import Connectivity from './Connectivity';
+import Stats from './Stats';
+import OverAllStats from './OverAllStats';
+import statJson from './data/overall-stats.json';
 
 import "./App.css" 
-import Stats from './Stats';
+
+const OVER_ALL = 0;
+const NODE = 1;
+const EDGE = 2;
 
 class App extends Component {
   state = {
+    sideBarState: OVER_ALL,
     id: 38,
     stats: [
       {
         id: 0,
         name: "Emails",
-        value: 50,
+        value: 40,
         color: "#20a8d8"
       },
       {
@@ -41,11 +48,17 @@ class App extends Component {
         color: "#4dbd74"
       },
     ],
+    overAllStat: [
+      {
+
+      }
+    ]
   }
 
   selectEdge = (id) => {
     this.setState({
-      id: id
+      id: id,
+      sideBarState: EDGE,
     })
   }
 
@@ -62,9 +75,26 @@ class App extends Component {
           <div className="side-graph-bar">
             <p>Bar</p>
           </div>
-          <Stats data={this.state.stats}/>
-          <WordCloud id={this.state.id}/>
-          <Connectivity id={this.state.id}/>
+          {
+            this.state.sideBarState === OVER_ALL &&
+            (
+              <div>
+                <OverAllStats data={statJson}/>
+                <WordCloud id={this.state.id}/>
+                <Connectivity id={this.state.id}/>                
+              </div>
+            )
+          }
+          {
+            this.state.sideBarState === EDGE && 
+            (
+              <div>
+                <Stats data={this.state.stats}/>
+                <WordCloud id={this.state.id}/>
+                <Connectivity id={this.state.id}/>
+              </div>
+            )
+          }
         </div>
       </div>
     );
