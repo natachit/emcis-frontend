@@ -8,6 +8,7 @@ class Connectivity extends Component {
         return {
             title: {
                 text: "Connectivity",
+                subtext: "Server Connectivity",
                 textStyle: {
                     fontSize: 18,
                     fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',

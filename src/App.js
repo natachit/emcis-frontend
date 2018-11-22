@@ -8,7 +8,7 @@ import Stats from './Stats';
 
 class App extends Component {
   state = {
-    id: 0,
+    id: 38,
     stats: [
       {
         id: 0,
@@ -53,9 +53,15 @@ class App extends Component {
     return (
       <div className="App">
         <div className="mail-graph">
+          <div className="mail-graph-bar">
+            <p>Bar</p>
+          </div>
           <MailGraph selectEdge={this.selectEdge} />
         </div>
         <div className="side-graph">
+          <div className="side-graph-bar">
+            <p>Bar</p>
+          </div>
           <Stats data={this.state.stats}/>
           <WordCloud id={this.state.id}/>
           <Connectivity id={this.state.id}/>

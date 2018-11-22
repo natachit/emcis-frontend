@@ -25,7 +25,7 @@ class MailGraph extends Component {
                                     borderColor: '#fff',
                                     borderWidth: 1,
                                     shadowBlur: 2,
-                                    shadowColor: 'rgba(0, 0, 0, 0.6)'
+                                    shadowColor: '#f0f3f5'
                                 },
                             },
                             label: {
@@ -74,7 +74,7 @@ class MailGraph extends Component {
     render() {
         return (
             <ReactEcharts
-                style={{ height: "500px" }}
+                style={{ height: "90%" }}
                 option={this.getOption()}
                 onEvents={{'click': this.onChartClick}}
             />

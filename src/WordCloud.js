@@ -10,6 +10,7 @@ class WordCloud extends Component {
         return {
             title: {
                 text: 'Wordcloud',
+                subtext: "Word Frequency",
                 textStyle: {
                     fontSize: 18,
                     fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
@@ -50,6 +51,7 @@ class WordCloud extends Component {
                 })
                 .map(function (key, index) {
                     //console.log(key, data[name][key])
+                    console.log(data[id])
                     return {
                         name: key,
                         value: data[id][key]  
