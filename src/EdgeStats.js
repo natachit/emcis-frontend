@@ -22,7 +22,6 @@ class EdgeStats extends Component {
 
     render() {
         const data = this.convertObjectToArray(this.props.data)
-        console.log(data)
         return (
             <div className="box-wrapper">
                 {

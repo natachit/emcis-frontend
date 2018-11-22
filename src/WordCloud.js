@@ -1,12 +1,11 @@
 import React, { Component } from "react"
-import data from "./data/wc22.json"
 import ReactEcharts from "echarts-for-react";
 import 'echarts-wordcloud'
 
 
 class WordCloud extends Component {
 
-    getOption(id) {
+    getOption(data) {
         return {
             title: {
                 text: 'Wordcloud',
@@ -45,15 +44,15 @@ class WordCloud extends Component {
                         shadowColor: '#333'
                     }
                 },
-                data: Object.keys(data[id])
+                data: Object.keys(data)
                 .filter(key => {
-                    return data[id][key] > 1
+                    return data[key] > 1
                 })
                 .map(function (key, index) {
                     //console.log(key, data[name][key])
                     return {
                         name: key,
-                        value: data[id][key]  
+                        value: data[key]  
                     };
                 }),
             } ]
@@ -61,10 +60,11 @@ class WordCloud extends Component {
     }
 
     render() {
+        console.log('recv', this.props.data)
         return (
             <ReactEcharts 
                 style={{ height: "300px", margin: "25px"}}
-                option={this.getOption(this.props.id)}
+                option={this.getOption(this.props.data)}
             />
         )
     }

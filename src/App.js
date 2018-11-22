@@ -6,6 +6,9 @@ import OverAllStats from './OverAllStats';
 import statJson from './data/overall-stats.json';
 import edgeStats from './data/edge-stats';
 import EdgeStats from './EdgeStats';
+import Button from './Button'
+import overAllWc from './data/all_wc.json'
+import edgeWc from './data/edge_wc.json'
 
 import "./App.css" 
 
@@ -49,11 +52,6 @@ class App extends Component {
         color: "#4dbd74"
       },
     ],
-    overAllStat: [
-      {
-
-      }
-    ]
   }
 
   selectEdge = (id) => {
@@ -63,13 +61,21 @@ class App extends Component {
     })
   }
 
+  changeSideBarState = () => {
+    this.setState({
+      sideBarState: OVER_ALL
+    })
+  }
+
   render() {
+    console.log(this.state.id)
     return (
       <div className="App">
         <div className="mail-graph">
           <div className="mail-graph-bar">
             <p>Bar</p>
           </div>
+          <Button changeState={this.changeSideBarState}/>
           <MailGraph selectEdge={this.selectEdge} />
         </div>
         <div className="side-graph">
@@ -81,7 +87,7 @@ class App extends Component {
             (
               <div>
                 <OverAllStats data={statJson}/>
-                <WordCloud id={this.state.id}/>
+                <WordCloud data={overAllWc}/>
                 <Connectivity id={this.state.id}/>                
               </div>
             )
@@ -91,7 +97,7 @@ class App extends Component {
             (
               <div>
                 <EdgeStats data={edgeStats[this.state.id]} />
-                <WordCloud id={this.state.id} />
+                <WordCloud data={edgeWc[this.state.id]} />
                 <Connectivity id={this.state.id} />
               </div>
             )
