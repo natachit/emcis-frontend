@@ -33,7 +33,7 @@ class App extends Component {
   }
 
   selectEdge = (id) => {
-    console.log(mail3.edges[id].message_list)
+    // console.log(mail3.edges[id].message_list)
     this.setState({
       id: id,
       sideBarState: EDGE,
@@ -48,19 +48,27 @@ class App extends Component {
   }
 
   selectEmail = (index) => {
-    console.log(this.state.msgList[index])
+    // console.log(this.state.msgList[index])
     this.setState({
       showContent: true,
       targetEmailIndex: this.state.msgList[index],
     })
   }
 
+  onClose = () => {
+    this.setState({
+      showContent: false,
+    })
+  }
+
   render() {
     return (
       <div className="App">
-        <Modal open={this.state.showContent} onClose={() => { this.setState({ showContent: false }) }} center>
+        <Modal open={this.state.showContent} onClose={this.onClose} center>
           <div>
-            {contents[this.state.targetEmailIndex]}
+            <div dangerouslySetInnerHTML={{ __html: contents[this.state.targetEmailIndex] }} />
+
+            
           </div>
         </Modal>
         <div className="mail-graph">
