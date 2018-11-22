@@ -6,9 +6,9 @@ class ContentLists extends Component {
         return (
             <div>
                 {
-                    this.props.headers.map(header => {   
+                    this.props.headers.map((header, index) => {   
                         return (
-                            <div className="list">
+                            <div className="list" onClick={() => this.props.selectEmail(index)}>
                                 <p className="list-title"><span className="hilight-grey">Subject:</span> {header[2]}</p>
                                 <p className="list-subtitle"><span className="hilight-grey">From:</span> {header[1]}</p>
                                 <p className="list-subtitle"><span className="hilight-grey">To:</span> {header[0]}</p>

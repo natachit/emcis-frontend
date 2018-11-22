@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Modal from 'react-responsive-modal';
 import MailGraph from './MailGraph';
 import WordCloud from './WordCloud';
 import Connectivity from './Connectivity';
@@ -27,6 +28,8 @@ class App extends Component {
     sideBarState: OVER_ALL,
     id: 38,
     msgList: {},
+    showContent: false,
+    targetEmailIndex: 0,
   }
 
   selectEdge = (id) => {
@@ -44,9 +47,22 @@ class App extends Component {
     })
   }
 
+  selectEmail = (index) => {
+    console.log(this.state.msgList[index])
+    this.setState({
+      showContent: true,
+      targetEmailIndex: this.state.msgList[index],
+    })
+  }
+
   render() {
     return (
       <div className="App">
+        <Modal open={this.state.showContent} onClose={() => { this.setState({ showContent: false }) }} center>
+          <div>
+            {contents[this.state.targetEmailIndex]}
+          </div>
+        </Modal>
         <div className="mail-graph">
           <div className="mail-graph-bar">
             <p>E-mail Crime Investigation System</p>
@@ -87,6 +103,7 @@ class App extends Component {
                       return headerContents[index]
                     })
                   }
+                  selectEmail={this.selectEmail}
                 />
               </div>
             )
