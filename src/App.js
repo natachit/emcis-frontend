@@ -80,7 +80,7 @@ class App extends Component {
         </div>
         <div className="side-graph">
           <div className="side-graph-bar">
-            <p>{BAR_TITLE[this.state.sideBarState]}</p><br />
+            <p>{BAR_TITLE[this.state.sideBarState]}</p>
             {
               this.state.sideBarState === EDGE && (
                 <p className="side-graph-bar-subtitle">{mail3.edges[this.state.id].From} & {mail3.edges[this.state.id].To}</p>
