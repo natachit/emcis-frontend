@@ -45,7 +45,7 @@ class WordCloud extends Component {
                         shadowColor: '#333'
                     }
                 },
-                data: Object.keys(data)//.slice(0, 60)
+                data: Object.keys(data).slice(0, 60)
                 .filter(key => {
                     return key.length < 15 
                 })
