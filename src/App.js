@@ -33,7 +33,6 @@ class App extends Component {
   }
 
   selectEdge = (id) => {
-    // console.log(mail3.edges[id].message_list)
     this.setState({
       id: id,
       sideBarState: EDGE,
@@ -93,8 +92,7 @@ class App extends Component {
             (
               <div>
                 <OverAllStats data={statJson}/>
-                <WordCloud data={overAllWc[0]}/>
-                <Connectivity id={this.state.id}/>                
+                <WordCloud data={overAllWc[0]}/>              
               </div>
             )
           }
