@@ -67,9 +67,10 @@ class App extends Component {
       <div className="App">
         <Modal open={this.state.showContent} onClose={this.onClose} center>
           <div>
-            <div dangerouslySetInnerHTML={{ __html: contents[this.state.targetEmailIndex] }} />
-
-            
+            <div>
+              <Connectivity id={this.state.targetEmailIndex} />
+            </div>
+            <div dangerouslySetInnerHTML={{ __html: contents[this.state.targetEmailIndex] }} />           
           </div>
         </Modal>
         <div className="mail-graph">
@@ -107,7 +108,6 @@ class App extends Component {
               <div>
                 <EdgeStats data={edgeStats[this.state.id]} />
                 <WordCloud data={edgeWc[this.state.id]} />
-                <Connectivity id={this.state.id} />
                 <ContentLists
                   headers={
                     this.state.msgList.map(index => {
