@@ -15,13 +15,14 @@ const img = ['https://png.pngtree.com/svg/20170602/avatar_107646.png',
             'https://image.flaticon.com/icons/png/512/146/146022.png',
             'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Creative-Tail-People-man-2.svg/1024px-Creative-Tail-People-man-2.svg.png',
             'https://cdn.icon-icons.com/icons2/582/PNG/512/wonder-women_icon-icons.com_55030.png']
-var count = -1
+var count
 
-console.log(json)
 
 class MailGraph extends Component {
 
     getOption() {
+
+        count = this.props.nodeImg
         return {
             animationDurationUpdate: 1500,
             animationEasingUpdate: 'quinticInOut',
@@ -34,7 +35,6 @@ class MailGraph extends Component {
                             count = count+1
                         else   
                             count = 0
-                        console.log(img[count], node.id)
                         return {
                             x: node.x,
                             y: node.y,

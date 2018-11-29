@@ -30,6 +30,7 @@ class App extends Component {
     msgList: {},
     showContent: false,
     targetEmailIndex: 0,
+    nodeImg: -1,
   }
 
   selectEdge = (id) => {
@@ -37,6 +38,7 @@ class App extends Component {
       id: id,
       sideBarState: EDGE,
       msgList: mail3.edges[id].message_list,
+      nodeImg: -1,
     })
   }
 
@@ -75,7 +77,10 @@ class App extends Component {
             <p>E-mail Crime Investigation System</p>
           </div>
           <Button changeState={this.changeSideBarState}/>
-          <MailGraph selectEdge={this.selectEdge} />
+          <MailGraph 
+            selectEdge={this.selectEdge} 
+            codeImg={this.state.nodeImg}
+          />
         </div>
         <div className="side-graph">
           <div className="side-graph-bar">

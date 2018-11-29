@@ -2,7 +2,7 @@ import React, { Component } from "react"
 
 class ContentLists extends Component {
     render() {
-        console.log(this.props.headers)
+        // console.log(this.props.headers)
         return (
             <div>
                 {
