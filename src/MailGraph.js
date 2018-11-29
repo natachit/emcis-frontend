@@ -1,6 +1,23 @@
 import React, { Component } from "react"
 import json from "./data/mail3.json"
-import ReactEcharts from "echarts-for-react";
+import ReactEcharts from "echarts-for-react"
+
+const img = ['https://png.pngtree.com/svg/20170602/avatar_107646.png',
+            'https://cdn.iconscout.com/icon/free/png-256/avatar-369-456321.png',
+            'https://cdn.iconscout.com/icon/free/png-256/avatar-372-456324.png',
+            'https://cdn.iconscout.com/icon/free/png-256/avatar-375-456327.png',
+            'https://cdn.iconscout.com/icon/free/png-256/avatar-367-456319.png',
+            'https://png.pngtree.com/svg/20161217/avatar__181424.png',
+            'https://www.presidia.it/wp-content/uploads/2015/09/flat-faces-icons-circle-3.png',
+            'https://image.flaticon.com/icons/png/512/206/206853.png',
+            'https://cdn.iconscout.com/icon/free/png-256/avatar-373-456325.png',
+            'https://image.flaticon.com/icons/png/512/194/194838.png',
+            'https://image.flaticon.com/icons/png/512/146/146022.png',
+            'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Creative-Tail-People-man-2.svg/1024px-Creative-Tail-People-man-2.svg.png',
+            'https://cdn.icon-icons.com/icons2/582/PNG/512/wonder-women_icon-icons.com_55030.png']
+var count = -1
+
+console.log(json)
 
 class MailGraph extends Component {
 
@@ -13,11 +30,17 @@ class MailGraph extends Component {
                     type: 'graph',
                     layout: 'none',
                     data: json.nodes.map(function (node) {
+                        if (count<img.length)
+                            count = count+1
+                        else   
+                            count = 0
+                        console.log(img[count], node.id)
                         return {
                             x: node.x,
                             y: node.y,
                             id: node.id,
                             name: node.label,
+                            symbol: 'image://'+img[count],
                             symbolSize: node.size*3,
                             itemStyle: {
                                 normal: {

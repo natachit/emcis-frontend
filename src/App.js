@@ -13,9 +13,9 @@ import edgeWc from './data/edge_wc_top80.json'
 import headerContents from './data/con_etc.json'
 import contents from './data/content.json'
 import mail3 from './data/mail3.json'
+import ContentLists from './ContentLists';
  
 import "./App.css" 
-import ContentLists from './ContentLists';
 
 const OVER_ALL = 0;
 const NODE = 1;
@@ -36,7 +36,7 @@ class App extends Component {
     this.setState({
       id: id,
       sideBarState: EDGE,
-      msgList: mail3.edges[id].message_list
+      msgList: mail3.edges[id].message_list,
     })
   }
 
