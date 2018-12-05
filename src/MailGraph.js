@@ -16,6 +16,9 @@ const img = ['https://png.pngtree.com/svg/20170602/avatar_107646.png',
             'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Creative-Tail-People-man-2.svg/1024px-Creative-Tail-People-man-2.svg.png',
             'https://cdn.icon-icons.com/icons2/582/PNG/512/wonder-women_icon-icons.com_55030.png']
 var count
+var categories = [];
+var n = -1;
+var selected = {};
 
 
 class MailGraph extends Component {
@@ -24,17 +27,33 @@ class MailGraph extends Component {
 
         count = this.props.nodeImg
         return {
-            animationDurationUpdate: 1500,
-            animationEasingUpdate: 'quinticInOut',
+            animationDurationUpdate: 800,
+            animationEasingUpdate: 'quadraticOut',
+            legend: [{
+                type: 'scroll',
+                data: categories.map(function (a) {
+                    return {
+                        name: a.name,   
+                    }
+                }),
+                selected: selected,
+                show: false
+            }],
             series : [
                 {
                     type: 'graph',
                     layout: 'none',
+                    categories: categories,
                     data: json.nodes.map(function (node) {
                         if (count<img.length)
                             count = count+1
                         else   
                             count = 0
+                        n = n+1;
+                        categories[n] = {
+                            name: node.label
+                        }
+                        selected[node.label] = true
                         return {
                             x: node.x,
                             y: node.y,
@@ -42,6 +61,7 @@ class MailGraph extends Component {
                             name: node.label,
                             symbol: 'image://'+img[count],
                             symbolSize: node.size*3,
+                            category: n,
                             itemStyle: {
                                 normal: {
                                     color: node.color,
@@ -86,19 +106,49 @@ class MailGraph extends Component {
                     
                 }
             ]
-    
         }
     }   
     
     onChartClick = (e) => {    
         if (e.dataType === "edge") {
+            var d = this.echarts_react.getEchartsInstance()
+            var s = e.data.source
+            var t = e.data.target
+            console.log(selected)
             this.props.selectEdge(e.data.id)
+            // this.echarts_react.getEchartsInstance().dispatchAction(
+                // {
+                //     type: 'focusNodeAdjacency',
+                //     seriesIndex: 0,
+                //     edgeDataIndex: e.data.id
+                // },
+            // )
+            Object.keys(selected).forEach(function (key) {
+                if (s === key || t === key) {
+                    d.dispatchAction(
+                        {
+                            type: 'legendSelect',
+                            name: key
+                        },
+                    )
+                }
+                else {
+                    d.dispatchAction(
+                        {
+                            type: 'legendUnSelect',
+                            name: key
+                        },
+                    )
+                }
+                
+            })
         }
     }
 
     render() {
         return (
-            <ReactEcharts
+            <ReactEcharts 
+                ref={(e) => { this.echarts_react = e; }}
                 style={{ height: "90%" }}
                 option={this.getOption()}
                 onEvents={{'click': this.onChartClick}}

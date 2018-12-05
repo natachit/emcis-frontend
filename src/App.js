@@ -14,6 +14,7 @@ import headerContents from './data/con_etc.json'
 import contents from './data/content.json'
 import mail3 from './data/mail3.json'
 import ContentLists from './ContentLists';
+import TestGraph from './TestGraph'
  
 import "./App.css" 
 
@@ -73,6 +74,12 @@ class App extends Component {
             <div dangerouslySetInnerHTML={{ __html: contents[this.state.targetEmailIndex] }} />           
           </div>
         </Modal>
+        <div>
+          <MailGraph 
+            selectEdge={this.selectEdge} 
+            codeImg={this.state.nodeImg}
+          />
+        </div>
         <div className="mail-graph">
           <div className="mail-graph-bar">
             <p>E-mail Crime Investigation System</p>
@@ -82,6 +89,7 @@ class App extends Component {
             selectEdge={this.selectEdge} 
             codeImg={this.state.nodeImg}
           />
+          {/* <TestGraph /> */}
         </div>
         <div className="side-graph">
           <div className="side-graph-bar">
