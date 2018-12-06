@@ -9,6 +9,7 @@ import Button from './Button'
 import ContentLists from './ContentLists';
 import TestGraph from './TestGraph'
 import SimpleReactFileUpload from './SimpleFileUpload';
+import Upload from './Upload'
 
 import data from './data/mock.json'
  
@@ -34,6 +35,7 @@ class App extends Component {
       "Connections": data.count_all_edge,
       "Words": data.all_wc_count
     },
+    uploaded: false,
   }
 
   selectEdge = (id) => {
@@ -74,9 +76,20 @@ class App extends Component {
     })
   }
 
+  submitFile = () => {
+    this.setState({
+      uploaded: true,
+    })
+  }
+
   render() {
     return (
       <div className="App">
+        <Modal open={!this.state.uploaded} center>
+          <div className="upload">
+            <Upload submit={this.submitFile}/>
+          </div>
+        </Modal>
         <Modal open={this.state.showContent} onClose={this.onClose} center>
           <div>
             <div>
@@ -94,12 +107,6 @@ class App extends Component {
             <div className="content" dangerouslySetInnerHTML={{ __html: data.list_content[this.state.targetEmailIndex] }} />           
           </div>
         </Modal>
-        <div>
-          {/* <MailGraph 
-            selectEdge={this.selectEdge} 
-            codeImg={this.state.nodeImg}
-          /> */}
-        </div>
         <div className="mail-graph">
           <div className="mail-graph-bar">
             <p>E-mail Crime Investigation System</p>
@@ -124,34 +131,34 @@ class App extends Component {
             }
           </div>
           <div className="side-graph-container">
-          {
-            this.state.sideBarState === OVER_ALL &&
-            (
-              <div>
-                <OverAllStats data={this.state.stat}/>
-                <WordCloud data={data.all_wc_60[0]}/>              
-              </div>
-            )
-          }
-          {
-            this.state.sideBarState === EDGE && 
-            (
-              <div>
-                <EdgeStats data={this.state.stat}
-                  // {edgeStats[this.state.id]} 
-                />
-                <WordCloud data={data.edge_wc_60[this.state.id]} />
-                <ContentLists
-                  headers={
-                    this.state.msgList.map(index => {
-                      return data.list_con_etc[index]
-                    })
-                  }
-                  selectEmail={this.selectEmail}
-                />
-              </div>
-            )
-          }
+            {
+              this.state.sideBarState === OVER_ALL &&
+              (
+                <div>
+                  <OverAllStats data={this.state.stat}/>
+                  <WordCloud data={data.all_wc_60[0]}/>              
+                </div>
+              )
+            }
+            {
+              this.state.sideBarState === EDGE && 
+              (
+                <div>
+                  <EdgeStats data={this.state.stat}
+                    // {edgeStats[this.state.id]} 
+                  />
+                  <WordCloud data={data.edge_wc_60[this.state.id]} />
+                  <ContentLists
+                    headers={
+                      this.state.msgList.map(index => {
+                        return data.list_con_etc[index]
+                      })
+                    }
+                    selectEmail={this.selectEmail}
+                  />
+                </div>
+              )
+            }
           </div>
         </div>
       </div>

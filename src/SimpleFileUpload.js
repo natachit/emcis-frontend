@@ -17,6 +17,7 @@ class SimpleReactFileUpload extends React.Component {
     this.fileUpload(this.state.file).then((response)=>{
       console.log(response.data);
     })
+    this.props.submit()
   }
   onChange(e) {
     this.setState({file:e.target.files[0]})
