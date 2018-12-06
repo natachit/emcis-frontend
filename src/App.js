@@ -50,7 +50,7 @@ class App extends Component {
   }
 
   selectEmail = (index) => {
-    // console.log(this.state.msgList[index])
+    console.log(headerContents)
     this.setState({
       showContent: true,
       targetEmailIndex: this.state.msgList[index],
@@ -70,6 +70,13 @@ class App extends Component {
           <div>
             <div>
               <Connectivity id={this.state.targetEmailIndex} />
+            </div>
+            <div className="header">
+              <p>Subject:<span className="hilight-blue"> {headerContents[this.state.targetEmailIndex][2]}</span></p>
+              <p>From:<span className="hilight-blue"> {headerContents[this.state.targetEmailIndex][0]}</span></p>
+              <p>To:<span className="hilight-blue"> {headerContents[this.state.targetEmailIndex][1]}</span></p>
+              <p>Date:<span className="hilight-blue"> {headerContents[this.state.targetEmailIndex][3]}</span></p>
+              <br></br><br></br>
             </div>
             <div dangerouslySetInnerHTML={{ __html: contents[this.state.targetEmailIndex] }} />           
           </div>

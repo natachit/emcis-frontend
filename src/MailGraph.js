@@ -92,7 +92,7 @@ class MailGraph extends Component {
                         },
                         emphasis: {
                             show: true,
-                        }
+                        },
                     },
                     roam: true,
                     focusNodeAdjacency: true,
@@ -114,7 +114,6 @@ class MailGraph extends Component {
             var d = this.echarts_react.getEchartsInstance()
             var s = e.data.source
             var t = e.data.target
-            console.log(selected)
             this.props.selectEdge(e.data.id)
             // this.echarts_react.getEchartsInstance().dispatchAction(
                 // {
