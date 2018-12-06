@@ -72,13 +72,13 @@ class App extends Component {
               <Connectivity id={this.state.targetEmailIndex} />
             </div>
             <div className="header">
-              <p>Subject:<span className="hilight-blue"> {headerContents[this.state.targetEmailIndex][2]}</span></p>
+              <p><span className="header-big"> {headerContents[this.state.targetEmailIndex][2]}</span></p>
               <p>From:<span className="hilight-blue"> {headerContents[this.state.targetEmailIndex][0]}</span></p>
               <p>To:<span className="hilight-blue"> {headerContents[this.state.targetEmailIndex][1]}</span></p>
               <p>Date:<span className="hilight-blue"> {headerContents[this.state.targetEmailIndex][3]}</span></p>
               <br></br><br></br>
             </div>
-            <div dangerouslySetInnerHTML={{ __html: contents[this.state.targetEmailIndex] }} />           
+            <div className="content" dangerouslySetInnerHTML={{ __html: contents[this.state.targetEmailIndex] }} />           
           </div>
         </Modal>
         <div>

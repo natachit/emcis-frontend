@@ -72,7 +72,7 @@ class Connectivity extends Component {
     render() {
         return (
             <ReactEcharts
-                style={{ height: "300px" , margin: "25px"}}
+                //style={{ height: "300px" , margin: "25px"}}
                 option={this.getOption(this.props.id)}
             />)
     }

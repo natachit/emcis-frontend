@@ -125,8 +125,18 @@ p {
 }
 
 .header {
-  font-size: 16px;
-  font-weight: 500;
+  margin: 0px 25px 0px 25px;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.header-big {
+  font-size: 25px;
+  font-weight: 400;
+}
+
+.content {
+  margin: 0px 25px 0px 25px;
 }
 
 .hilight-grey {
@@ -134,6 +144,7 @@ p {
 }
 
 .hilight-blue {
+  font-weight: 400;
   color: #20a8d8;
 }
 
