@@ -10,7 +10,7 @@ class WordCloud extends Component {
         return {
             title: {
                 text: 'Wordcloud',
-                subtext: "Word Frequency",
+                subtext: "Top 60 most frequently words",
                 textStyle: {
                     fontSize: 18,
                     fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
