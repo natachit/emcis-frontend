@@ -1,10 +1,9 @@
 import React, { Component } from "react"
-import json from "./data/recgraph.json"
 import ReactEcharts from "echarts-for-react";
 
 class Connectivity extends Component {
 
-    getOption(id) {
+    getOption(data) {
         return {
             title: {
                 text: "Connectivity",
@@ -25,7 +24,8 @@ class Connectivity extends Component {
                     type: 'graph',
                     edgeSymbol: ['', 'arrow'],
     
-                    data: json[id].nodes.map(function (node) {
+                    data: data.nodes.map(function (node) {
+                        console.log(node.id)
                         return {
                             x: node.x,
                             y: node.y,
@@ -36,10 +36,10 @@ class Connectivity extends Component {
                                 normal: {
                                     color: node.color
                                 }
-                            }
+                            },
                         };
                     }),
-                    edges: json[id].edges.map(function (edge) {
+                    edges: data.edges.map(function (edge) {
                         return {
                             source: edge.by,
                             target: edge.fromm,
@@ -73,7 +73,7 @@ class Connectivity extends Component {
         return (
             <ReactEcharts
                 //style={{ height: "300px" , margin: "25px"}}
-                option={this.getOption(this.props.id)}
+                option={this.getOption(this.props.data)}
             />)
     }
 }

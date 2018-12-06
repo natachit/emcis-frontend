@@ -1,5 +1,4 @@
 import React, { Component } from "react"
-import json from "./data/mail3.json"
 import ReactEcharts from "echarts-for-react"
 
 const img = ['https://png.pngtree.com/svg/20170602/avatar_107646.png',
@@ -23,7 +22,7 @@ var selected = {};
 
 class MailGraph extends Component {
 
-    getOption() {
+    getOption(nodes, edges) {
 
         count = this.props.nodeImg
         return {
@@ -44,7 +43,7 @@ class MailGraph extends Component {
                     type: 'graph',
                     layout: 'none',
                     categories: categories,
-                    data: json.nodes.map(function (node) {
+                    data: nodes.map(function (node) {
                         if (count<img.length)
                             count = count+1
                         else   
@@ -72,13 +71,14 @@ class MailGraph extends Component {
                                 },
                             },
                             label: {
-                                position: 'right',
+                                position: 'bottom',
+                                rotate: 90,
                                 formatter: '{b}',
                                 color: 'white'
                             },
                         };
                     }),
-                    edges: json.edges.map(function (edge) {
+                    edges: edges.map(function (edge) {
                         return {
                             source: edge.From,
                             target: edge.To,
@@ -149,7 +149,7 @@ class MailGraph extends Component {
             <ReactEcharts 
                 ref={(e) => { this.echarts_react = e; }}
                 style={{ height: "90%" }}
-                option={this.getOption()}
+                option={this.getOption(this.props.nodes, this.props.edges)}
                 onEvents={{'click': this.onChartClick}}
             />
         )

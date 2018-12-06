@@ -14,7 +14,8 @@ class EdgeStats extends Component {
                 name: key,
                 value: obj[key],
                 color: color[index],
-                class: key === "Emails" ? "box-large" : "box-medium"
+                // class: key === "Emails" ? "box-large" : "box-medium"
+                class: "box-medium"
             }
         })
         color = [color[1], color[2], color[0]]
