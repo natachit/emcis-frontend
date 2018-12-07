@@ -7,12 +7,8 @@ import OverAllStats from './OverAllStats';
 import EdgeStats from './EdgeStats';
 import Button from './Button'
 import ContentLists from './ContentLists';
-import TestGraph from './TestGraph'
-import SimpleReactFileUpload from './SimpleFileUpload';
 import Upload from './Upload'
 
-import datam from './data/mock.json'
- 
 import "./App.css" 
 
 const OVER_ALL = 0;
@@ -166,7 +162,7 @@ class App extends Component {
     else {
       return (
         <div className="App">
-          <Modal open={!this.state.uploaded} center>
+          <Modal open={!this.state.uploaded} showCloseIcon={false} center>
             <div>
               <Upload submit={this.submitFile}/>
             </div>
