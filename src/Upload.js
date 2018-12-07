@@ -1,12 +1,21 @@
 import React, { Component } from 'react'
+import axios from 'axios'
+import { css } from 'react-emotion';
+import Loader from 'react-spinners/PulseLoader';
+
 import './App.css'
 
-import axios from 'axios'
+const override = css`
+    display: block;
+    margin: 0 auto;
+    border-color: red;
+`;
 
 class Upload extends Component {
 
     state = {
-        file: null
+        file: null,
+        loading: false
     }
 
     handleFile(e) {
@@ -17,16 +26,16 @@ class Upload extends Component {
     }
 
     handleUpload(e) {
+        this.setState({
+            loading: true
+        })
         const formData = new FormData();
         formData.append("file", this.state.file);
-        axios({
-            url: 'http://158.108.33.19:5000/upload',
-            method: "POST",
-            data: formData
-        }).then((res)=>{
-            console.log(res.data)
-            this.props.submit(res.data)
-        })        
+
+        axios.post('http://158.108.33.19:5000/upload', formData)
+            .then((res)=>{
+                this.props.submit(res.data)
+            })      
     }
 
     render() {
@@ -39,6 +48,16 @@ class Upload extends Component {
                     <button type="button" onClick={(e) => this.handleUpload(e)}>Upload</button>
                     <br /><br />
                     <p className="upload">**Only .mbox file are allowed</p>
+                    <br /><br />
+                    <div align="center">
+                    <Loader
+                        className={override}
+                        sizeUnit={"px"}
+                        size={10}
+                        color={'#20c997'}
+                        loading={this.state.loading}
+                    />
+                    </div>
                 </form>
             </div>
         )
