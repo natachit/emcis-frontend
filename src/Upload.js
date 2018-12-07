@@ -23,28 +23,25 @@ class Upload extends Component {
         axios({
             url: 'http://158.108.33.19:5000/upload',
             method: "POST",
-            headers: {
-                authorization: 'token'
-            },
+            // headers: {
+            //     authorization: 'token'
+            // },
             data: this.state.file
         }).then((res)=>{
-
+            console.log(res)
         })
     }
 
     render() {
         return (
             <div className="App">
-                <h1>THE FORM</h1>
                 <form>
-                    <div>
-                        <label>Select File</label>
-                        <input type="file" name="file" onChange={(e) => this.handleFile(e)}></input>
-                    </div>
+                    <h1>Upload file for investigation</h1>
                     <br />
-                    <button type="button" onClick={(e) => this.handleUpload(e)}>
-                        Upload
-                    </button>
+                    <input type="file" name="file" onChange={(e) => this.handleFile(e)}></input>
+                    <button type="button" onClick={(e) => this.handleUpload(e)}>Upload</button>
+                    <br /><br />
+                    <p className="upload">**Only .mbox file are allowed</p>
                 </form>
             </div>
         )

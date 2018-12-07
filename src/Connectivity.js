@@ -25,7 +25,6 @@ class Connectivity extends Component {
                     edgeSymbol: ['', 'arrow'],
     
                     data: data.nodes.map(function (node) {
-                        console.log(node.id)
                         return {
                             x: node.x,
                             y: node.y,

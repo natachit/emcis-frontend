@@ -83,86 +83,94 @@ class App extends Component {
   }
 
   render() {
-    return (
-      <div className="App">
-        <Modal open={!this.state.uploaded} center>
-          <div className="upload">
-            <Upload submit={this.submitFile}/>
-          </div>
-        </Modal>
-        <Modal open={this.state.showContent} onClose={this.onClose} center>
-          <div>
+    if (this.state.uploaded) {
+      return (
+        <div className="App">
+          <Modal open={this.state.showContent} onClose={this.onClose} center>
             <div>
-              <Connectivity data={data.relayGraph[this.state.targetEmailIndex]}
-                // id={this.state.targetEmailIndex} 
-              />
+              <div>
+                <Connectivity data={data.relayGraph[this.state.targetEmailIndex]}
+                  // id={this.state.targetEmailIndex} 
+                />
+              </div>
+              <div className="header">
+                <p><span className="header-big"> {data.list_con_etc[this.state.targetEmailIndex][2]}</span></p>
+                <p>From:<span className="hilight-blue"> {data.list_con_etc[this.state.targetEmailIndex][0]}</span></p>
+                <p>To:<span className="hilight-blue"> {data.list_con_etc[this.state.targetEmailIndex][1]}</span></p>
+                <p>Date:<span className="hilight-blue"> {data.list_con_etc[this.state.targetEmailIndex][3]}</span></p>
+                <br></br><br></br>
+              </div>
+              <div className="content" dangerouslySetInnerHTML={{ __html: data.list_content[this.state.targetEmailIndex] }} />           
             </div>
-            <div className="header">
-              <p><span className="header-big"> {data.list_con_etc[this.state.targetEmailIndex][2]}</span></p>
-              <p>From:<span className="hilight-blue"> {data.list_con_etc[this.state.targetEmailIndex][0]}</span></p>
-              <p>To:<span className="hilight-blue"> {data.list_con_etc[this.state.targetEmailIndex][1]}</span></p>
-              <p>Date:<span className="hilight-blue"> {data.list_con_etc[this.state.targetEmailIndex][3]}</span></p>
-              <br></br><br></br>
+          </Modal>
+          <div className="mail-graph">
+            <div className="mail-graph-bar">
+              <p>E-mail Crime Investigation System</p>
             </div>
-            <div className="content" dangerouslySetInnerHTML={{ __html: data.list_content[this.state.targetEmailIndex] }} />           
+            <Button changeState={this.changeSideBarState}/>
+            {/* <SimpleReactFileUpload /> */}
+            <MailGraph 
+              nodes={data.nodes}
+              edges={data.edges}
+              selectEdge={this.selectEdge} 
+              codeImg={this.state.nodeImg}
+            />
+            {/* <TestGraph /> */}
           </div>
-        </Modal>
-        <div className="mail-graph">
-          <div className="mail-graph-bar">
-            <p>E-mail Crime Investigation System</p>
-          </div>
-          <Button changeState={this.changeSideBarState}/>
-          {/* <SimpleReactFileUpload /> */}
-          <MailGraph 
-            nodes={data.nodes}
-            edges={data.edges}
-            selectEdge={this.selectEdge} 
-            codeImg={this.state.nodeImg}
-          />
-          {/* <TestGraph /> */}
-        </div>
-        <div className="side-graph">
-          <div className="side-graph-bar">
-            <p>{BAR_TITLE[this.state.sideBarState]}</p>
-            {
-              this.state.sideBarState === EDGE && (
-                <p className="side-graph-bar-subtitle">{data.edges[this.state.id].From} & {data.edges[this.state.id].To}</p>
-              )
-            }
-          </div>
-          <div className="side-graph-container">
-            {
-              this.state.sideBarState === OVER_ALL &&
-              (
-                <div>
-                  <OverAllStats data={this.state.stat}/>
-                  <WordCloud data={data.all_wc_60[0]}/>              
-                </div>
-              )
-            }
-            {
-              this.state.sideBarState === EDGE && 
-              (
-                <div>
-                  <EdgeStats data={this.state.stat}
-                    // {edgeStats[this.state.id]} 
-                  />
-                  <WordCloud data={data.edge_wc_60[this.state.id]} />
-                  <ContentLists
-                    headers={
-                      this.state.msgList.map(index => {
-                        return data.list_con_etc[index]
-                      })
-                    }
-                    selectEmail={this.selectEmail}
-                  />
-                </div>
-              )
-            }
+          <div className="side-graph">
+            <div className="side-graph-bar">
+              <p>{BAR_TITLE[this.state.sideBarState]}</p>
+              {
+                this.state.sideBarState === EDGE && (
+                  <p className="side-graph-bar-subtitle">{data.edges[this.state.id].From} & {data.edges[this.state.id].To}</p>
+                )
+              }
+            </div>
+            <div className="side-graph-container">
+              {
+                this.state.sideBarState === OVER_ALL &&
+                (
+                  <div>
+                    <OverAllStats data={this.state.stat}/>
+                    <WordCloud data={data.all_wc_60[0]}/>              
+                  </div>
+                )
+              }
+              {
+                this.state.sideBarState === EDGE && 
+                (
+                  <div>
+                    <EdgeStats data={this.state.stat}
+                      // {edgeStats[this.state.id]} 
+                    />
+                    <WordCloud data={data.edge_wc_60[this.state.id]} />
+                    <ContentLists
+                      headers={
+                        this.state.msgList.map(index => {
+                          return data.list_con_etc[index]
+                        })
+                      }
+                      selectEmail={this.selectEmail}
+                    />
+                  </div>
+                )
+              }
+            </div>
           </div>
         </div>
-      </div>
-    );
+      )
+    }
+    else {
+      return (
+        <div className="App">
+          <Modal open={!this.state.uploaded} center>
+            <div>
+              <Upload submit={this.submitFile}/>
+            </div>
+          </Modal>
+        </div>
+      );
+    }
   }
 }
 
