@@ -17,19 +17,16 @@ class Upload extends Component {
     }
 
     handleUpload(e) {
-        this.props.submit()
-        console.log(this.state)
-        // let file = this.state.file
+        const formData = new FormData();
+        formData.append("file", this.state.file);
         axios({
             url: 'http://158.108.33.19:5000/upload',
             method: "POST",
-            // headers: {
-            //     authorization: 'token'
-            // },
-            data: this.state.file
+            data: formData
         }).then((res)=>{
-            console.log(res)
-        })
+            console.log(res.data)
+            this.props.submit(res.data)
+        })        
     }
 
     render() {

@@ -11,7 +11,7 @@ import TestGraph from './TestGraph'
 import SimpleReactFileUpload from './SimpleFileUpload';
 import Upload from './Upload'
 
-import data from './data/mock.json'
+import datam from './data/mock.json'
  
 import "./App.css" 
 
@@ -23,18 +23,14 @@ const BAR_TITLE = ["Overall Analytics", "User Analytics", "Connection Analytics"
 
 class App extends Component {
   state = {
+    data: {},
     sideBarState: OVER_ALL,
     id: 38,
     msgList: {},
     showContent: false,
     targetEmailIndex: 0,
     nodeImg: -1,
-    stat: {
-      "Emails": data.count_all_mail,
-      "Users": data.count_all_node,
-      "Connections": data.count_all_edge,
-      "Words": data.all_wc_count
-    },
+    stat: {},
     uploaded: false,
   }
 
@@ -42,11 +38,11 @@ class App extends Component {
     this.setState({
       id: id,
       sideBarState: EDGE,
-      msgList: data.edges[id].message_list,
+      msgList: this.state.data.edges[id].message_list,
       nodeImg: -1,
       stat: {
-        Emails: data.edges[id].message_count, 
-        Words: data.edge_wc_count_list[id]
+        Emails: this.state.data.edges[id].message_count, 
+        Words: this.state.data.edge_wc_count_list[id]
       },
     })
   }
@@ -55,10 +51,10 @@ class App extends Component {
     this.setState({
       sideBarState: OVER_ALL,
       stat: {
-        "Emails": data.count_all_mail,
-        "Users": data.count_all_node,
-        "Connections": data.count_all_edge,
-        "Words": data.all_wc_count
+        "Emails": this.state.data.count_all_mail,
+        "Users": this.state.data.count_all_node,
+        "Connections": this.state.data.count_all_edge,
+        "Words": this.state.data.all_wc_count
       },
     })
   }
@@ -76,9 +72,16 @@ class App extends Component {
     })
   }
 
-  submitFile = () => {
+  submitFile = (file) => {
     this.setState({
       uploaded: true,
+      data: file,
+      stat: {
+        "Emails": file.count_all_mail,
+        "Users": file.count_all_node,
+        "Connections": file.count_all_edge,
+        "Words": file.all_wc_count
+      },
     })
   }
 
@@ -89,18 +92,18 @@ class App extends Component {
           <Modal open={this.state.showContent} onClose={this.onClose} center>
             <div>
               <div>
-                <Connectivity data={data.relayGraph[this.state.targetEmailIndex]}
+                <Connectivity data={this.state.data.relayGraph[this.state.targetEmailIndex]}
                   // id={this.state.targetEmailIndex} 
                 />
               </div>
               <div className="header">
-                <p><span className="header-big"> {data.list_con_etc[this.state.targetEmailIndex][2]}</span></p>
-                <p>From:<span className="hilight-blue"> {data.list_con_etc[this.state.targetEmailIndex][0]}</span></p>
-                <p>To:<span className="hilight-blue"> {data.list_con_etc[this.state.targetEmailIndex][1]}</span></p>
-                <p>Date:<span className="hilight-blue"> {data.list_con_etc[this.state.targetEmailIndex][3]}</span></p>
+                <p><span className="header-big"> {this.state.data.list_con_etc[this.state.targetEmailIndex][2]}</span></p>
+                <p>From:<span className="hilight-blue"> {this.state.data.list_con_etc[this.state.targetEmailIndex][0]}</span></p>
+                <p>To:<span className="hilight-blue"> {this.state.data.list_con_etc[this.state.targetEmailIndex][1]}</span></p>
+                <p>Date:<span className="hilight-blue"> {this.state.data.list_con_etc[this.state.targetEmailIndex][3]}</span></p>
                 <br></br><br></br>
               </div>
-              <div className="content" dangerouslySetInnerHTML={{ __html: data.list_content[this.state.targetEmailIndex] }} />           
+              <div className="content" dangerouslySetInnerHTML={{ __html: this.state.data.list_content[this.state.targetEmailIndex] }} />           
             </div>
           </Modal>
           <div className="mail-graph">
@@ -110,8 +113,8 @@ class App extends Component {
             <Button changeState={this.changeSideBarState}/>
             {/* <SimpleReactFileUpload /> */}
             <MailGraph 
-              nodes={data.nodes}
-              edges={data.edges}
+              nodes={this.state.data.nodes}
+              edges={this.state.data.edges}
               selectEdge={this.selectEdge} 
               codeImg={this.state.nodeImg}
             />
@@ -122,7 +125,7 @@ class App extends Component {
               <p>{BAR_TITLE[this.state.sideBarState]}</p>
               {
                 this.state.sideBarState === EDGE && (
-                  <p className="side-graph-bar-subtitle">{data.edges[this.state.id].From} & {data.edges[this.state.id].To}</p>
+                  <p className="side-graph-bar-subtitle">{this.state.data.edges[this.state.id].From} & {this.state.data.edges[this.state.id].To}</p>
                 )
               }
             </div>
@@ -132,7 +135,7 @@ class App extends Component {
                 (
                   <div>
                     <OverAllStats data={this.state.stat}/>
-                    <WordCloud data={data.all_wc_60[0]}/>              
+                    <WordCloud data={this.state.data.all_wc_60[0]}/>              
                   </div>
                 )
               }
@@ -143,11 +146,11 @@ class App extends Component {
                     <EdgeStats data={this.state.stat}
                       // {edgeStats[this.state.id]} 
                     />
-                    <WordCloud data={data.edge_wc_60[this.state.id]} />
+                    <WordCloud data={this.state.data.edge_wc_60[this.state.id]} />
                     <ContentLists
                       headers={
                         this.state.msgList.map(index => {
-                          return data.list_con_etc[index]
+                          return this.state.data.list_con_etc[index]
                         })
                       }
                       selectEmail={this.selectEmail}
