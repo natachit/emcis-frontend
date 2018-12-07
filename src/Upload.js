@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import { css } from 'react-emotion';
-import Loader from 'react-spinners/PulseLoader';
+import Loader from 'react-spinners/SyncLoader';
 
 import './App.css'
 
