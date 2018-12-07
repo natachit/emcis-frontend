@@ -45,18 +45,18 @@ class Upload extends Component {
                     <h1>Upload file for investigation</h1>
                     <br />
                     <input type="file" name="file" onChange={(e) => this.handleFile(e)}></input>
-                    <button type="button" onClick={(e) => this.handleUpload(e)}>Upload</button>
                     <br /><br />
                     <p className="upload">**Only .mbox file are allowed</p>
-                    <br /><br />
                     <div align="center">
-                    <Loader
-                        className={override}
-                        sizeUnit={"px"}
-                        size={10}
-                        color={'#20c997'}
-                        loading={this.state.loading}
-                    />
+                        <button type="button" onClick={(e) => this.handleUpload(e)}>Upload</button>
+                        <br /><br />
+                        <Loader
+                            className={override}
+                            sizeUnit={"px"}
+                            size={10}
+                            color={'#20c997'}
+                            loading={this.state.loading}
+                        />
                     </div>
                 </form>
             </div>
