@@ -29,10 +29,16 @@ class Upload extends Component {
         this.setState({
             loading: true
         })
+        const config = {
+            onUploadProgress: function(progressEvent) {
+                var percentCompleted = Math.round( (progressEvent.loaded * 100) / progressEvent.total );
+                console.log(percentCompleted)
+            }
+        }
         const formData = new FormData();
         formData.append("file", this.state.file);
 
-        axios.post('http://158.108.33.19:5000/upload', formData)
+        axios.post('http://158.108.33.19:5000/upload', formData, config)
             .then((res)=>{
                 this.props.submit(res.data)
             })      

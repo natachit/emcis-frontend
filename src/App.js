@@ -81,6 +81,10 @@ class App extends Component {
     })
   }
 
+  notClose = () => {
+    
+  }
+
   render() {
     if (this.state.uploaded) {
       return (
@@ -162,7 +166,7 @@ class App extends Component {
     else {
       return (
         <div className="App">
-          <Modal open={!this.state.uploaded} showCloseIcon={false} center>
+          <Modal open={!this.state.uploaded} onClose={this.notClose} showCloseIcon={false} center>
             <div>
               <Upload submit={this.submitFile}/>
             </div>
