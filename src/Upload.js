@@ -27,30 +27,44 @@ class Upload extends Component {
     }
 
     handleUpload(e) {
-        var type = this.state.file.name.split('.').slice(1).join('.')
-        if (type !== 'mbox') {
+        if (this.state.file == null) {
             this.setState({
-                error: 'File .'+type+' are not allowed.'
+                error: 'No file to upload'
             })
         }
         else {
-            this.setState({
-                loading: true
-            })
-            const config = {
-                onUploadProgress: function(progressEvent) {
-                    var percentCompleted = Math.round( (progressEvent.loaded * 100) / progressEvent.total );
-                    console.log(percentCompleted)
+            var type = this.state.file.name.split('.').slice(1).join('.')
+            if (type !== 'mbox') {
+                if (type !== null){
+                    this.setState({
+                        error: 'File .'+type+' are not allowed.'
+                    })
+                }
+                else {
+                    this.setState({
+                        error: 'No file to upload'
+                    })
                 }
             }
-            const formData = new FormData();
-            formData.append("file", this.state.file);
+            else {
+                this.setState({
+                    loading: true
+                })
+                const config = {
+                    onUploadProgress: function(progressEvent) {
+                        var percentCompleted = Math.round( (progressEvent.loaded * 100) / progressEvent.total );
+                        console.log(percentCompleted)
+                    }
+                }
+                const formData = new FormData();
+                formData.append("file", this.state.file);
 
-            axios.post('http://158.108.33.19:5000/upload', formData, config)
-                .then((res)=>{
-                    this.props.submit(res.data)
-                })   
-        }   
+                axios.post('http://158.108.33.19:5000/upload', formData, config)
+                    .then((res)=>{
+                        this.props.submit(res.data)
+                    })   
+            }   
+        }
     }
 
     render() {
