@@ -150,7 +150,6 @@ class App extends Component {
                 (
                   <div>
                     <EdgeStats data={this.state.stat}
-                      // {edgeStats[this.state.id]} 
                     />
                     <WordCloud data={this.state.data.edge_wc_60[this.state.id]} />
                     <ContentLists

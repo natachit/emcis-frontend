@@ -44,7 +44,7 @@ class MailGraph extends Component {
                     layout: 'none',
                     categories: categories,
                     data: nodes.map(function (node) {
-                        if (count<img.length)
+                        if (count<img.length-1)
                             count = count+1
                         else   
                             count = 0
