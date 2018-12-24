@@ -20,14 +20,19 @@ const BAR_TITLE = ["Overall Analytics", "User Analytics", "Connection Analytics"
 
 class App extends Component {
   state = {
-    data: {},
+    data: mock,
     sideBarState: OVER_ALL,
     id: 38,
     msgList: {},
     showContent: false,
     targetEmailIndex: 0,
     nodeImg: -1,
-    stat: {},
+    stat: {
+      "Emails": mock.count_all_mail,
+      "Users": mock.count_all_node,
+      "Connections": mock.count_all_edge,
+      "Words": mock.all_wc_count
+    },
     uploaded: false,
     openUpload: true,
   }
@@ -83,13 +88,8 @@ class App extends Component {
     })
   }
 
-  notClose = () => {
-    
-  }
-
   onCloseUpload = () => {
     this.setState({ 
-      data: mock,
       openUpload: false,
       uploaded: true
     });
@@ -121,14 +121,12 @@ class App extends Component {
               <p>E-mail Crime Investigation System</p>
             </div>
             <Button changeState={this.changeSideBarState}/>
-            {/* <SimpleReactFileUpload /> */}
             <MailGraph 
               nodes={this.state.data.nodes}
               edges={this.state.data.edges}
               selectEdge={this.selectEdge} 
               codeImg={this.state.nodeImg}
             />
-            {/* <TestGraph /> */}
           </div>
           <div className="side-graph">
             <div className="side-graph-bar">
@@ -176,7 +174,7 @@ class App extends Component {
     else {
       return (
         <div className="App">
-          <Modal open={this.state.openUpload} onClose={this.onCloseUpload} showCloseIcon={true} center>
+          <Modal open={this.state.openUpload} onClose={this.onCloseUpload} center>
             <div>
               <Upload submit={this.submitFile}/>
             </div>

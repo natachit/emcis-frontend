@@ -13,7 +13,7 @@ const img = ['https://png.pngtree.com/svg/20170602/avatar_107646.png',
             'https://image.flaticon.com/icons/png/512/194/194838.png',
             'https://image.flaticon.com/icons/png/512/146/146022.png',
             'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Creative-Tail-People-man-2.svg/1024px-Creative-Tail-People-man-2.svg.png',
-            'https://cdn.icon-icons.com/icons2/582/PNG/512/wonder-women_icon-icons.com_55030.png']
+            'http://www.iyrix.com/wp-content/uploads/2018/02/20161014_58006bf8f1610.png']
 var count
 var categories = [];
 var n = -1;
