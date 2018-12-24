@@ -9,10 +9,11 @@ import Button from './Button'
 import ContentLists from './ContentLists';
 import Upload from './Upload'
 
-import "./App.css" 
+import "./App.css"
+import mock from "./data/mock.json"
 
 const OVER_ALL = 0;
-const NODE = 1;
+// const NODE = 1;
 const EDGE = 2;
 
 const BAR_TITLE = ["Overall Analytics", "User Analytics", "Connection Analytics"]
@@ -28,6 +29,7 @@ class App extends Component {
     nodeImg: -1,
     stat: {},
     uploaded: false,
+    openUpload: true,
   }
 
   selectEdge = (id) => {
@@ -62,7 +64,7 @@ class App extends Component {
     })
   }
 
-  onClose = () => {
+  onCloseContent = () => {
     this.setState({
       showContent: false,
     })
@@ -85,11 +87,19 @@ class App extends Component {
     
   }
 
+  onCloseUpload = () => {
+    this.setState({ 
+      data: mock,
+      openUpload: false,
+      uploaded: true
+    });
+  };
+
   render() {
     if (this.state.uploaded) {
       return (
         <div className="App">
-          <Modal open={this.state.showContent} onClose={this.onClose} center>
+          <Modal open={this.state.showContent} onClose={this.onCloseContent} center>
             <div>
               <div>
                 <Connectivity data={this.state.data.relayGraph[this.state.targetEmailIndex]}
@@ -166,7 +176,7 @@ class App extends Component {
     else {
       return (
         <div className="App">
-          <Modal open={!this.state.uploaded} onClose={this.notClose} showCloseIcon={false} center>
+          <Modal open={this.state.openUpload} onClose={this.onCloseUpload} showCloseIcon={true} center>
             <div>
               <Upload submit={this.submitFile}/>
             </div>

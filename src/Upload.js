@@ -15,7 +15,8 @@ class Upload extends Component {
 
     state = {
         file: null,
-        loading: false
+        loading: false,
+        error: ''
     }
 
     handleFile(e) {
@@ -26,22 +27,30 @@ class Upload extends Component {
     }
 
     handleUpload(e) {
-        this.setState({
-            loading: true
-        })
-        const config = {
-            onUploadProgress: function(progressEvent) {
-                var percentCompleted = Math.round( (progressEvent.loaded * 100) / progressEvent.total );
-                console.log(percentCompleted)
-            }
+        var type = this.state.file.name.split('.').slice(1).join('.')
+        if (type !== 'mbox') {
+            this.setState({
+                error: 'File .'+type+' are not allowed.'
+            })
         }
-        const formData = new FormData();
-        formData.append("file", this.state.file);
+        else {
+            this.setState({
+                loading: true
+            })
+            const config = {
+                onUploadProgress: function(progressEvent) {
+                    var percentCompleted = Math.round( (progressEvent.loaded * 100) / progressEvent.total );
+                    console.log(percentCompleted)
+                }
+            }
+            const formData = new FormData();
+            formData.append("file", this.state.file);
 
-        axios.post('http://158.108.33.19:5000/upload', formData, config)
-            .then((res)=>{
-                this.props.submit(res.data)
-            })      
+            axios.post('http://158.108.33.19:5000/upload', formData, config)
+                .then((res)=>{
+                    this.props.submit(res.data)
+                })   
+        }   
     }
 
     render() {
@@ -53,9 +62,11 @@ class Upload extends Component {
                     <input type="file" name="file" onChange={(e) => this.handleFile(e)}></input>
                     <br /><br />
                     <p className="upload">**Only .mbox file are allowed</p>
+                    <br />
                     <div align="center">
                         <button type="button" onClick={(e) => this.handleUpload(e)}>Upload</button>
                         <br /><br />
+                        <p className="error">{this.state.error}</p>
                         <Loader
                             className={override}
                             sizeUnit={"px"}
