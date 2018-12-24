@@ -1,6 +1,8 @@
 import React, { Component } from "react"
 import ReactEcharts from "echarts-for-react";
 
+var num = 0
+
 class Connectivity extends Component {
 
     getOption(data) {
@@ -25,9 +27,11 @@ class Connectivity extends Component {
                     edgeSymbol: ['', 'arrow'],
     
                     data: data.nodes.map(function (node) {
+                        console.log(node.y)
+                        num = num+10
                         return {
                             x: node.x,
-                            y: node.y,
+                            y: node.y+num,
                             id: node.id,
                             name: node.label,
                             symbolSize: node.size,
@@ -35,6 +39,8 @@ class Connectivity extends Component {
                                 normal: {
                                     color: node.color
                                 }
+                            },
+                            label: {
                             },
                         };
                     }),
@@ -54,7 +60,11 @@ class Connectivity extends Component {
                         };
                     }),
                     label: {
-                        rotationRange: [-90, 90],
+                        normal: {
+                            position: 'bottom',
+                            formatter: '{b}',
+                            show: true
+                        },
                         emphasis: {
                             position: 'bottom',
                             show: true

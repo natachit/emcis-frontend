@@ -64,10 +64,6 @@ class MailGraph extends Component {
                             itemStyle: {
                                 normal: {
                                     color: node.color,
-                                    borderColor: '#fff',
-                                    borderWidth: 1,
-                                    shadowBlur: 2,
-                                    shadowColor: '#f0f3f5'
                                 },
                             },
                             label: {

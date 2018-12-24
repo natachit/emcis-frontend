@@ -102,9 +102,7 @@ class App extends Component {
           <Modal open={this.state.showContent} onClose={this.onCloseContent} center>
             <div>
               <div>
-                <Connectivity data={this.state.data.relayGraph[this.state.targetEmailIndex]}
-                  // id={this.state.targetEmailIndex} 
-                />
+                <Connectivity data={this.state.data.relayGraph[this.state.targetEmailIndex]}/>
               </div>
               <div className="header">
                 <p><span className="header-big"> {this.state.data.list_con_etc[this.state.targetEmailIndex][2]}</span></p>
