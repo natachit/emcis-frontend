@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/emcis-frontend/precache-manifest.ca6baa88d3e7b84f171699ba613c36e2.js"
+  "/emcis-frontend/precache-manifest.ac132b2d219f18749827c638ab00a443.js"
 );
 
 workbox.clientsClaim();
