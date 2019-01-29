@@ -33,8 +33,8 @@ class App extends Component {
       "Connections": mock.count_all_edge,
       "Words": mock.all_wc_count
     },
-    uploaded: false,
-    openUpload: true,
+    uploaded: true,
+    openUpload: false,
   }
 
   selectEdge = (id) => {
