@@ -8,6 +8,9 @@ import EdgeStats from './EdgeStats';
 import Button from './Button'
 import ContentLists from './ContentLists';
 import Upload from './Upload'
+import Page from './Page';
+import SecondPage from './SecondPage';
+import ThirdPage from './ThirdPage';
 
 import "./App.css"
 import mock from "./data/mock.json"
@@ -35,6 +38,7 @@ class App extends Component {
     },
     uploaded: true,
     openUpload: false,
+    tab: 1,
   }
 
   selectEdge = (id) => {
@@ -95,8 +99,15 @@ class App extends Component {
     });
   };
 
+  changeTab = (index) => {
+    this.setState({
+      tab: index
+    })
+  }
+
   render() {
     if (this.state.uploaded) {
+      if (this.state.tab === 1) {
       return (
         <div className="App">
           <Modal open={this.state.showContent} onClose={this.onCloseContent} center>
@@ -114,6 +125,11 @@ class App extends Component {
               <div className="content" dangerouslySetInnerHTML={{ __html: this.state.data.list_content[this.state.targetEmailIndex] }} />           
             </div>
           </Modal>
+          <div className="topnav">
+            <Page changeTab={this.changeTab} tab={'EMCIS'} page={1}/>
+            <Page changeTab={this.changeTab} tab={'Graph'} page={2}/>
+            <Page changeTab={this.changeTab} tab={'Tree'} page={3}/>
+          </div>
           <div className="mail-graph">
             <div className="mail-graph-bar">
               <p>E-mail Crime Investigation System</p>
@@ -166,7 +182,40 @@ class App extends Component {
             </div>
           </div>
         </div>
-      )
+      )}
+      else if (this.state.tab === 2) {
+        return (
+          <div className="App">
+            <div className="topnav">
+              <Page changeTab={this.changeTab} tab={'EMCIS'} page={1}/>
+              <Page changeTab={this.changeTab} tab={'Graph'} page={2}/>
+              <Page changeTab={this.changeTab} tab={'Tree'} page={3}/>
+            </div>
+            <div className="page">
+              <div className="page-content">
+                <SecondPage />
+              </div>
+            </div>
+          </div>
+        )
+      }
+      else if (this.state.tab === 3) {
+        return (
+          <div className="App">
+            <div className="topnav">
+              <Page changeTab={this.changeTab} tab={'EMCIS'} page={1}/>
+              <Page changeTab={this.changeTab} tab={'Graph'} page={2}/>
+              <Page changeTab={this.changeTab} tab={'Tree'} page={3}/>
+            </div>
+            <div className="page">
+              <div className="custom-container">
+                <div className="page-content">
+                  <ThirdPage />
+                </div>
+              </div>
+            </div>
+          </div>)
+      }
     }
     else {
       return (

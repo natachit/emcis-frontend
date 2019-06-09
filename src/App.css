@@ -3,9 +3,19 @@
   flex-direction: row;
 }
 
+.page {
+  height: 2000px;
+  position: fixed;
+  background-color: #73818f;
+  width: 100%;
+}
+
+.page-content {
+  margin-top: 100px;
+}
+
 .mail-graph, .side-graph {
   width: 50%;
-
 }
 
 .mail-graph {
@@ -27,6 +37,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 45px;
 }
 
 .side-graph-bar {
@@ -35,7 +46,7 @@
   position: fixed;
   flex-direction: column;
   margin-bottom: 50px;
-  z-index: 999;
+  z-index: 998;
   border-bottom: 1px solid #c8ced3;
 }
 
@@ -171,4 +182,66 @@ p {
 .error {
   font-size: 13px;
   color: red;
+}
+
+
+.topnav {
+  background-color: #333;
+  overflow: hidden;  
+  position: fixed; /* Set the navbar to fixed position */
+  top: 0; /* Position the navbar at the top of the page */
+  width: 100%; /* Full width */
+  z-index: 999;
+}
+
+/* Style the links inside the navigation bar */
+.topnav button {
+  float: left;
+  background-color: #333;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  border: #333
+}
+
+/* Change the color of links on hover */
+.topnav button:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+/* Add a color to the active/current link */
+.topnav button.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
+div.custom-container {
+  /* background-color: #242424; */
+  margin-left: 80px;
+}
+
+svg.custom .node circle {
+	fill: #F3F3FF;
+	stroke: #9e1a1a;
+	stroke-width: 2px;
+}
+
+svg.custom .node text {
+  font-size: 15px;
+	background-color: #444;
+	fill: #444;
+	text-shadow: 0 0px 2px #444;
+}
+
+svg.custom .node {
+	cursor: pointer;
+}
+
+svg.custom path.link {
+	fill: none;
+	stroke: lightgray;
+	stroke-width: 0.5px;
 }
